@@ -3,1236 +3,583 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estuda+ — Telas</title>
+<title>Estuda+</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
-  --bg: #F5F2EB; --bg2: #EDEAE2; --papel: #FAFAF7;
-  --verde: #1A6B3C; --verde-cl: #E8F5EE;
-  --tinta: #1C1C1A; --tinta2: #4A4A45; --tinta3: #8A8A82;
-  --linha: #D8D4C8; --amarelo: #F5C842; --vermelho: #C0392B;
-  --azul: #1A3A8F; --azul-cl: #EEF2FF;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
+  --bg: #F5F2EB;
+  --bg2: #EDEAE2;
+  --papel: #FAFAF7;
+  --verde: #1A6B3C;
+  --verde-claro: #E8F5EE;
+  --tinta: #1C1C1A;
+  --tinta2: #4A4A45;
+  --tinta3: #8A8A82;
+  --linha: #D8D4C8;
+  --amarelo: #F5C842;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
 }
-body { font-family: var(--sans); background: #2A2A2A; color: var(--tinta); }
 
-/* ===== NAVEGAÇÃO DE TELAS ===== */
-.screen-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: #1A1A1A; border-bottom: 1px solid #333;
-  padding: 0 24px; height: 48px;
-  display: flex; align-items: center; gap: 4px; overflow-x: auto;
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--tinta);
+  font-size: 15px;
+  line-height: 1.6;
 }
-.screen-nav::-webkit-scrollbar { height: 3px; }
-.screen-nav::-webkit-scrollbar-track { background: #1A1A1A; }
-.screen-nav::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
 
-.snav-label { font-family: var(--mono); font-size: 11px; color: #555; margin-right: 12px; white-space: nowrap; }
-
-.snav-btn {
-  font-family: var(--mono); font-size: 11px;
-  padding: 5px 12px; border-radius: 3px;
-  background: transparent; color: #888;
-  border: 1px solid #333; cursor: pointer;
-  white-space: nowrap; transition: all .15s;
-}
-.snav-btn:hover { color: #ccc; border-color: #555; }
-.snav-btn.on { background: var(--verde); color: #fff; border-color: var(--verde); }
-
-/* ===== TELA WRAPPER ===== */
-.screen { display: none; min-height: 100vh; padding-top: 48px; }
-.screen.on { display: block; }
-
-/* ===== SHARED NAV ===== */
-.app-nav {
-  height: 52px; background: var(--papel);
-  border-bottom: 1px solid var(--linha);
+nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 40px;
+  height: 56px;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linha);
+  position: sticky; top: 0; z-index: 50;
 }
-.logo { font-family: var(--mono); font-size: 16px; font-weight: 500; }
+
+.logo {
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
 .logo em { color: var(--verde); font-style: normal; }
 
-.btn { font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 4px; cursor: pointer; border: none; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all .15s; }
+nav ul { display: flex; gap: 28px; list-style: none; }
+nav ul a { font-size: 13px; color: var(--tinta2); text-decoration: none; transition: color .15s; }
+nav ul a:hover { color: var(--verde); }
+
+.btn {
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 4px;
+  cursor: pointer; border: none;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .15s;
+}
 .btn-verde { background: var(--verde); color: #fff; }
 .btn-verde:hover { background: #145730; }
 .btn-ghost { background: transparent; color: var(--tinta2); border: 1px solid var(--linha); }
 .btn-ghost:hover { border-color: var(--tinta3); color: var(--tinta); }
-.btn-sm { font-size: 12px; padding: 5px 12px; }
 
-/* ===== APP SHELL ===== */
-.app-shell {
-  display: grid; grid-template-columns: 200px 1fr;
-  min-height: calc(100vh - 100px);
+/* HERO */
+.hero {
+  padding: 72px 40px 64px;
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
 }
 
-.sidebar {
-  background: var(--papel); border-right: 1px solid var(--linha);
-  padding: 20px 12px; display: flex; flex-direction: column; gap: 2px;
+.hero-label {
+  font-family: var(--mono);
+  font-size: 11px; color: var(--tinta3);
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
-.si {
+h1 {
+  font-size: 38px; font-weight: 600;
+  line-height: 1.15; letter-spacing: -1px;
+  margin-bottom: 18px;
+}
+
+h1 mark {
+  background: var(--amarelo); color: var(--tinta);
+  padding: 0 4px; border-radius: 2px;
+}
+
+.hero-desc {
+  font-size: 15px; color: var(--tinta2);
+  line-height: 1.7; margin-bottom: 32px;
+  font-weight: 300; max-width: 380px;
+}
+
+.hero-ctas { display: flex; gap: 10px; }
+
+.hero-note {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--tinta3);
+}
+
+.hero-card {
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: 8px; overflow: hidden;
+}
+
+.hc-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--linha);
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg2);
+}
+
+.hc-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hc-title { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin-left: 6px; }
+
+.hc-body { padding: 20px; }
+.hc-mat { font-family: var(--mono); font-size: 10px; color: var(--tinta3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.hc-q { font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
+.hc-ops { display: flex; flex-direction: column; gap: 7px; }
+
+.hc-op {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 12px; border-radius: 4px;
-  font-size: 13px; color: var(--tinta3);
-  cursor: pointer; transition: all .15s; text-decoration: none;
+  font-size: 13px; color: var(--tinta2);
+  padding: 8px 12px;
+  border: 1px solid var(--linha); border-radius: 4px;
+  cursor: pointer; transition: all .15s;
+  background: var(--bg);
 }
-.si:hover { background: var(--bg2); color: var(--tinta2); }
-.si.on { background: var(--verde-cl); color: var(--verde); font-weight: 500; }
-.si-icon { font-size: 15px; min-width: 20px; text-align: center; }
-.si-sep { height: 1px; background: var(--linha); margin: 8px 0; }
+.hc-op:hover { border-color: var(--verde); color: var(--tinta); }
+.hc-op.certa { border-color: var(--verde); background: var(--verde-claro); color: var(--verde); font-weight: 500; }
+.hc-op.errada { color: var(--tinta3); text-decoration: line-through; }
+.hc-letra { font-family: var(--mono); font-size: 11px; font-weight: 500; min-width: 18px; }
 
-.main { background: var(--bg); padding: 32px; overflow-y: auto; }
+.hc-foot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
+}
 
-/* ===== UTIL ===== */
-.s-tag { font-family: var(--mono); font-size: 10px; color: var(--tinta3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-h2 { font-size: 20px; font-weight: 600; letter-spacing: -.4px; margin-bottom: 4px; }
-h3 { font-size: 15px; font-weight: 600; letter-spacing: -.3px; }
-.muted { font-size: 13px; color: var(--tinta3); }
-.card { background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; }
-.row { display: flex; align-items: center; gap: 12px; }
-.col { display: flex; flex-direction: column; gap: 8px; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-.grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.prog {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--tinta3);
+}
+.prog-track { width: 80px; height: 3px; background: var(--linha); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--verde); }
 
-.badge { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 2px; }
-.b-ok { background: var(--verde-cl); color: var(--verde); }
-.b-att { background: #FEF9E7; color: #9A7D0A; }
-.b-err { background: #FDEDEC; color: var(--vermelho); }
-.b-info { background: var(--azul-cl); color: var(--azul); }
+/* DIVIDER */
+.divider { height: 1px; background: var(--linha); margin: 0 40px; }
 
-.stat-card { background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; padding: 16px; }
-.stat-n { font-family: var(--mono); font-size: 24px; font-weight: 500; line-height: 1; }
-.stat-l { font-size: 11px; color: var(--tinta3); margin-top: 4px; }
+/* MODULOS */
+.modulos { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+
+.s-tag { font-family: var(--mono); font-size: 11px; color: var(--tinta3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+
+h2 { font-size: 24px; font-weight: 600; letter-spacing: -.5px; margin-bottom: 32px; }
+
+.mod-grid {
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 1px; border: 1px solid var(--linha);
+  border-radius: 8px; overflow: hidden; background: var(--linha);
+}
+
+.mod {
+  background: var(--papel); padding: 28px;
+  transition: background .15s; cursor: default;
+}
+.mod:hover { background: var(--bg2); }
+
+.mod-n { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin-bottom: 12px; }
+.mod-t { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.mod-d { font-size: 13px; color: var(--tinta2); line-height: 1.65; font-weight: 300; margin-bottom: 18px; }
+.mod-l { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.mod-l li { font-size: 12px; color: var(--tinta3); display: flex; align-items: center; gap: 8px; }
+.mod-l li::before { content: '–'; color: var(--verde); font-family: var(--mono); }
+
+/* MATERIAS */
+.mat-band {
+  background: var(--bg2);
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+.mat-inner {
+  max-width: 960px; margin: 0 auto;
+  padding: 32px 40px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.mat-lbl { font-family: var(--mono); font-size: 11px; color: var(--tinta3); white-space: nowrap; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-size: 12px; color: var(--tinta2);
+  padding: 3px 10px; border: 1px solid var(--linha);
+  border-radius: 3px; background: var(--papel);
+  cursor: pointer; transition: all .15s;
+}
+.tag:hover { border-color: var(--verde); color: var(--verde); background: var(--verde-claro); }
+
+/* PROF */
+.prof-sec {
+  max-width: 960px; margin: 0 auto;
+  padding: 64px 40px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+}
+
+.steps { display: flex; flex-direction: column; gap: 16px; margin: 20px 0 28px; }
+.step { display: flex; align-items: flex-start; gap: 14px; }
+.step-n { font-family: var(--mono); font-size: 11px; color: var(--verde); min-width: 20px; padding-top: 2px; }
+.step-t { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.step-d { font-size: 12px; color: var(--tinta3); font-weight: 300; }
+
+.mock {
+  border: 1px solid var(--linha); border-radius: 8px;
+  overflow: hidden; background: var(--papel);
+}
+.mock-bar {
+  background: var(--bg2); border-bottom: 1px solid var(--linha);
+  padding: 10px 16px; display: flex; align-items: center; gap: 6px;
+}
+.mock-bar-t { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin: 0 auto; }
+
+.mock-tabs { display: flex; border-bottom: 1px solid var(--linha); }
+.tab {
+  font-size: 12px; padding: 9px 14px;
+  color: var(--tinta3); border-right: 1px solid var(--linha);
+  cursor: pointer; transition: all .15s;
+}
+.tab:hover { background: var(--bg2); }
+.tab.on { color: var(--verde); border-bottom: 2px solid var(--verde); background: var(--verde-claro); }
+
+.mock-body { padding: 16px; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+.stat { padding: 12px; border: 1px solid var(--linha); border-radius: 4px; background: var(--bg); }
+.stat-n { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1; margin-bottom: 3px; }
+.stat-l { font-size: 11px; color: var(--tinta3); }
 
 table { width: 100%; border-collapse: collapse; }
-th { font-family: var(--mono); font-size: 10px; color: var(--tinta3); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--linha); letter-spacing: .5px; }
-td { font-size: 13px; padding: 10px 10px; border-bottom: 1px solid var(--bg2); color: var(--tinta2); vertical-align: middle; }
+th { font-family: var(--mono); font-size: 10px; color: var(--tinta3); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--linha); letter-spacing: .5px; font-weight: 500; }
+td { font-size: 12px; padding: 9px 8px; border-bottom: 1px solid var(--bg2); color: var(--tinta2); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--bg2); }
 
-.prog-bar { height: 4px; background: var(--linha); border-radius: 2px; overflow: hidden; margin-top: 6px; }
-.prog-fill { height: 100%; background: var(--verde); border-radius: 2px; }
+.badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  padding: 2px 7px; border-radius: 2px;
+}
+.b-ok { background: var(--verde-claro); color: var(--verde); }
+.b-att { background: #FEF9E7; color: #9A7D0A; }
 
-input, select, textarea {
-  font-family: var(--sans); font-size: 13px;
-  border: 1px solid var(--linha); border-radius: 4px;
-  padding: 9px 12px; background: var(--papel); color: var(--tinta);
-  width: 100%; outline: none; transition: border .15s;
+/* SIMULADO */
+.sim-sec {
+  background: var(--bg2);
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
 }
-input:focus, select:focus, textarea:focus { border-color: var(--verde); }
-label { font-size: 12px; font-weight: 500; color: var(--tinta2); margin-bottom: 4px; display: block; }
+.sim-inner { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
 
-/* =============================
-   TELA 1 — LOGIN
-   ============================= */
-#t-login {
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  min-height: 100vh; padding: 48px 20px;
+.sim-mock {
+  border: 1px solid var(--linha); border-radius: 8px;
+  overflow: hidden; background: var(--papel); margin-top: 32px;
 }
-#t-login.on { display: flex; }
+.sim-top {
+  padding: 13px 20px; background: var(--bg2);
+  border-bottom: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sim-top-l { font-size: 13px; color: var(--tinta2); font-weight: 500; }
+.sim-top-r { font-family: var(--mono); font-size: 13px; color: var(--tinta); }
 
-.login-box {
-  background: var(--papel); border: 1px solid var(--linha);
-  border-radius: 8px; width: 100%; max-width: 380px;
-  overflow: hidden;
-}
-.login-top {
-  padding: 28px 28px 0;
-}
-.login-logo { font-family: var(--mono); font-size: 20px; font-weight: 500; margin-bottom: 20px; }
-.login-logo em { color: var(--verde); font-style: normal; }
-.login-tabs { display: flex; border-bottom: 1px solid var(--linha); margin: 0 -28px; }
-.ltab { flex: 1; text-align: center; padding: 10px; font-size: 13px; font-weight: 500; color: var(--tinta3); cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
-.ltab.on { color: var(--verde); border-bottom-color: var(--verde); }
-.login-form { padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 14px; }
-.form-group { display: flex; flex-direction: column; gap: 5px; }
-.login-footer { padding: 16px 28px; border-top: 1px solid var(--linha); background: var(--bg2); }
-.login-footer p { font-size: 12px; color: var(--tinta3); text-align: center; }
-.login-footer a { color: var(--verde); text-decoration: none; font-weight: 500; }
-.login-tipo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.tipo-btn {
-  padding: 12px; border: 1px solid var(--linha); border-radius: 4px;
-  text-align: center; cursor: pointer; transition: all .15s; background: var(--bg);
-}
-.tipo-btn:hover, .tipo-btn.on { border-color: var(--verde); background: var(--verde-cl); }
-.tipo-btn .tipo-icon { font-size: 20px; margin-bottom: 4px; }
-.tipo-btn .tipo-label { font-size: 12px; font-weight: 500; color: var(--tinta2); }
-.tipo-btn.on .tipo-label { color: var(--verde); }
+.sim-bar { height: 3px; background: var(--linha); }
+.sim-fill { height: 100%; background: var(--verde); width: 36%; }
 
-/* =============================
-   TELA 2 — DASHBOARD ALUNO
-   ============================= */
-.dash-header { margin-bottom: 24px; }
-.dash-header p { font-size: 13px; color: var(--tinta3); margin-top: 3px; }
+.sim-q { padding: 28px 28px 20px; }
+.sim-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.sim-num { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
+.sim-tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border: 1px solid var(--linha); border-radius: 2px; color: var(--tinta3); }
+.sim-txt { font-size: 14px; line-height: 1.75; color: var(--tinta); margin-bottom: 20px; }
 
-.materia-card {
-  background: var(--papel); border: 1px solid var(--linha);
-  border-radius: 6px; padding: 16px;
-  cursor: pointer; transition: all .15s;
-}
-.materia-card:hover { border-color: var(--verde); }
-.mat-icon { font-size: 22px; margin-bottom: 10px; }
-.mat-nome { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-.mat-sub { font-size: 11px; color: var(--tinta3); margin-bottom: 10px; }
-
-.atividade-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 0; border-bottom: 1px solid var(--bg2);
-}
-.atividade-item:last-child { border-bottom: none; }
-.atv-icon {
-  width: 34px; height: 34px; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
-}
-.atv-title { font-size: 13px; font-weight: 500; }
-.atv-sub { font-size: 11px; color: var(--tinta3); margin-top: 1px; }
-.atv-meta { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--tinta3); text-align: right; }
-
-.streak-box {
-  background: var(--papel); border: 1px solid var(--linha);
-  border-radius: 6px; padding: 16px;
-  display: flex; align-items: center; gap: 14px;
-}
-.streak-num { font-family: var(--mono); font-size: 32px; font-weight: 500; color: var(--amarelo); line-height: 1; }
-.streak-label { font-size: 13px; font-weight: 600; }
-.streak-sub { font-size: 11px; color: var(--tinta3); margin-top: 2px; }
-
-/* =============================
-   TELA 3 — CONTEÚDO / AULA
-   ============================= */
-.conteudo-layout {
-  display: grid; grid-template-columns: 220px 1fr 200px;
-  gap: 0; min-height: calc(100vh - 100px);
-}
-
-.conteudo-sidebar {
-  background: var(--papel); border-right: 1px solid var(--linha);
-  padding: 20px 0;
-}
-.cs-title { font-family: var(--mono); font-size: 10px; color: var(--tinta3); padding: 0 16px 10px; letter-spacing: 1px; text-transform: uppercase; }
-.cs-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 16px; font-size: 13px; color: var(--tinta3);
-  cursor: pointer; transition: all .15s; border-left: 2px solid transparent;
-}
-.cs-item:hover { background: var(--bg2); color: var(--tinta2); }
-.cs-item.on { color: var(--verde); border-left-color: var(--verde); background: var(--verde-cl); font-weight: 500; }
-.cs-item.done { color: var(--tinta3); }
-.cs-item.done .cs-check { color: var(--verde); }
-.cs-check { margin-left: auto; font-size: 12px; }
-
-.conteudo-main { padding: 36px 40px; background: var(--bg); max-width: 680px; }
-.c-breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin-bottom: 20px; }
-.c-breadcrumb span { color: var(--tinta2); }
-.c-titulo { font-size: 26px; font-weight: 600; letter-spacing: -.5px; margin-bottom: 6px; }
-.c-meta { font-size: 12px; color: var(--tinta3); margin-bottom: 28px; display: flex; gap: 16px; }
-.c-body { font-size: 14px; line-height: 1.85; color: var(--tinta2); font-weight: 300; }
-.c-body p { margin-bottom: 16px; }
-.c-body strong { font-weight: 600; color: var(--tinta); }
-.c-destaque {
-  background: var(--verde-cl); border-left: 3px solid var(--verde);
-  padding: 14px 18px; border-radius: 0 4px 4px 0;
-  font-size: 13px; line-height: 1.7; margin: 20px 0;
-}
-.c-formula {
-  background: var(--bg2); border: 1px solid var(--linha);
-  padding: 16px 20px; border-radius: 4px;
-  font-family: var(--mono); font-size: 15px; font-weight: 500;
-  text-align: center; margin: 20px 0; color: var(--tinta);
-}
-.c-nav-bottom { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--linha); }
-
-.conteudo-aside {
-  background: var(--papel); border-left: 1px solid var(--linha);
-  padding: 20px 16px;
-}
-.aside-title { font-family: var(--mono); font-size: 10px; color: var(--tinta3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
-.aside-item { font-size: 12px; color: var(--tinta2); padding: 7px 0; border-bottom: 1px solid var(--bg2); cursor: pointer; }
-.aside-item:hover { color: var(--verde); }
-.aside-item:last-child { border-bottom: none; }
-
-/* =============================
-   TELA 4 — EXERCÍCIO
-   ============================= */
-.ex-layout {
-  display: grid; grid-template-columns: 1fr 280px;
-  gap: 0; min-height: calc(100vh - 100px);
-}
-.ex-main { padding: 32px 36px; background: var(--bg); }
-.ex-aside { background: var(--papel); border-left: 1px solid var(--linha); padding: 24px 16px; }
-
-.ex-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.ex-progress-text { font-family: var(--mono); font-size: 12px; color: var(--tinta3); }
-.ex-timer { font-family: var(--mono); font-size: 13px; color: var(--tinta); }
-
-.ex-card { background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; overflow: hidden; }
-.ex-card-top { padding: 16px 20px; border-bottom: 1px solid var(--linha); background: var(--bg2); display: flex; align-items: center; justify-content: space-between; }
-.ex-q-body { padding: 24px 20px; }
-.ex-q-texto { font-size: 15px; line-height: 1.75; color: var(--tinta); margin-bottom: 22px; }
-.ex-opts { display: flex; flex-direction: column; gap: 9px; }
-.ex-opt {
+.sim-alts { display: flex; flex-direction: column; gap: 8px; }
+.sim-alt {
   display: flex; align-items: flex-start; gap: 12px;
-  padding: 12px 14px; border: 1px solid var(--linha);
+  padding: 11px 14px; border: 1px solid var(--linha);
   border-radius: 4px; font-size: 13px; color: var(--tinta2);
   cursor: pointer; transition: all .15s; background: var(--bg);
-  line-height: 1.5;
 }
-.ex-opt:hover { border-color: var(--tinta3); color: var(--tinta); background: var(--papel); }
-.ex-opt.on { border-color: var(--verde); background: var(--verde-cl); color: var(--verde); }
-.ex-opt.certa { border-color: var(--verde); background: var(--verde-cl); color: var(--verde); }
-.ex-opt.errada { border-color: #e8b4b8; background: #FDEDEC; color: var(--vermelho); }
-.ex-letra { font-family: var(--mono); font-size: 11px; font-weight: 500; min-width: 18px; padding-top: 1px; }
-.ex-card-foot { padding: 14px 20px; border-top: 1px solid var(--linha); display: flex; justify-content: space-between; align-items: center; background: var(--bg2); }
+.sim-alt:hover { border-color: var(--tinta3); color: var(--tinta); background: var(--papel); }
+.sim-alt.on { border-color: var(--verde); background: var(--verde-claro); color: var(--verde); }
+.sim-l { font-family: var(--mono); font-size: 11px; font-weight: 500; min-width: 16px; padding-top: 1px; }
 
-.ex-explicacao {
-  background: var(--verde-cl); border: 1px solid rgba(26,107,60,.2);
-  border-radius: 4px; padding: 14px 16px; margin-top: 16px;
-}
-.ex-exp-title { font-size: 12px; font-weight: 600; color: var(--verde); margin-bottom: 6px; }
-.ex-exp-text { font-size: 13px; line-height: 1.65; color: var(--tinta2); }
-
-.numeros-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; }
-.nq {
-  aspect-ratio: 1; border-radius: 3px; border: 1px solid var(--linha);
-  background: var(--bg); display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  cursor: pointer; transition: all .15s; color: var(--tinta3);
-}
-.nq:hover { border-color: var(--tinta3); color: var(--tinta); }
-.nq.on { background: var(--verde); color: #fff; border-color: var(--verde); }
-.nq.ok { background: var(--verde-cl); color: var(--verde); border-color: var(--verde); }
-.nq.err { background: #FDEDEC; color: var(--vermelho); border-color: #e8b4b8; }
-
-/* =============================
-   TELA 5 — RESULTADO SIMULADO
-   ============================= */
-.result-layout { max-width: 800px; margin: 0 auto; padding: 32px; background: var(--bg); min-height: calc(100vh - 100px); }
-
-.result-header { background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; padding: 24px; margin-bottom: 24px; }
-.result-title { font-size: 22px; font-weight: 600; letter-spacing: -.4px; margin-bottom: 4px; }
-.result-meta { font-size: 12px; color: var(--tinta3); }
-
-.result-placar {
-  display: grid; grid-template-columns: auto 1fr; gap: 28px;
-  align-items: center; margin-top: 20px;
-}
-.result-nota {
-  font-family: var(--mono); font-size: 64px; font-weight: 500;
-  line-height: 1; color: var(--verde);
-}
-.result-nota span { font-size: 24px; color: var(--tinta3); }
-
-.result-barra-grupo { display: flex; flex-direction: column; gap: 10px; }
-.rbg-item { display: flex; flex-direction: column; gap: 4px; }
-.rbg-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--tinta2); }
-.rbg-pct { font-family: var(--mono); color: var(--tinta3); font-size: 11px; }
-.rbg-bar { height: 6px; background: var(--linha); border-radius: 3px; overflow: hidden; }
-.rbg-fill { height: 100%; border-radius: 3px; background: var(--verde); }
-
-.result-acertos { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 24px; }
-
-.questoes-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 16px; }
-.qg-item {
-  width: 36px; height: 36px; border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  cursor: pointer; border: 1px solid transparent;
-}
-.qg-ok { background: var(--verde-cl); color: var(--verde); border-color: rgba(26,107,60,.2); }
-.qg-err { background: #FDEDEC; color: var(--vermelho); border-color: rgba(192,57,43,.2); }
-.qg-skip { background: var(--bg2); color: var(--tinta3); border-color: var(--linha); }
-
-/* =============================
-   TELA 6 — PAINEL PROFESSOR COMPLETO
-   ============================= */
-.prof-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
-
-.notif-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--vermelho); color: #fff;
-  font-family: var(--mono); font-size: 10px; font-weight: 500;
-  margin-left: 6px;
-}
-
-.aluno-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 0; border-bottom: 1px solid var(--bg2);
-}
-.aluno-item:last-child { border-bottom: none; }
-.aluno-avatar {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--bg2); border: 1px solid var(--linha);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; flex-shrink: 0;
-}
-.aluno-nome { font-size: 13px; font-weight: 500; }
-.aluno-sub { font-size: 11px; color: var(--tinta3); }
-.aluno-prog { margin-left: auto; text-align: right; }
-.aluno-pct { font-family: var(--mono); font-size: 12px; color: var(--tinta2); }
-
-.duvida-card {
-  background: var(--papel); border: 1px solid var(--linha);
-  border-radius: 6px; padding: 14px; margin-bottom: 10px;
-  cursor: pointer; transition: all .15s;
-}
-.duvida-card:hover { border-color: var(--verde); }
-.duvida-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.duvida-aluno { font-size: 12px; font-weight: 600; color: var(--tinta2); }
-.duvida-tempo { font-family: var(--mono); font-size: 10px; color: var(--tinta3); }
-.duvida-texto { font-size: 13px; color: var(--tinta2); line-height: 1.55; }
-.duvida-tag { font-family: var(--mono); font-size: 10px; color: var(--tinta3); margin-top: 8px; }
-
-/* =============================
-   TELA 7 — PERFIL DO ALUNO
-   ============================= */
-.perfil-layout { max-width: 800px; margin: 0 auto; }
-
-.perfil-header {
-  background: var(--papel); border: 1px solid var(--linha);
-  border-radius: 6px; padding: 24px;
-  display: flex; align-items: center; gap: 20px; margin-bottom: 24px;
-}
-.perfil-avatar {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--verde-cl); border: 2px solid var(--linha);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px; flex-shrink: 0;
-}
-.perfil-nome { font-size: 20px; font-weight: 600; letter-spacing: -.3px; }
-.perfil-sub { font-size: 13px; color: var(--tinta3); margin-top: 2px; }
-.perfil-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-
-.conquista-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 0; border-bottom: 1px solid var(--bg2);
-}
-.conquista-item:last-child { border-bottom: none; }
-.conquista-icon {
-  width: 36px; height: 36px; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0; border: 1px solid var(--linha);
+.sim-foot {
+  padding: 13px 20px; border-top: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
   background: var(--bg2);
 }
-.conquista-icon.obtida { background: var(--verde-cl); border-color: rgba(26,107,60,.2); }
-.conquista-nome { font-size: 13px; font-weight: 500; }
-.conquista-desc { font-size: 11px; color: var(--tinta3); margin-top: 2px; }
-.conquista-data { margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--tinta3); }
+.sim-foot-l { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
 
-.cal-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
-}
-.cal-day {
-  aspect-ratio: 1; border-radius: 2px; background: var(--bg2);
-  cursor: default; transition: background .1s;
-}
-.cal-day.d1 { background: #c8e6d9; }
-.cal-day.d2 { background: #8ecfab; }
-.cal-day.d3 { background: #4db37e; }
-.cal-day.d4 { background: var(--verde); }
-
-/* =============================
-   TELA 8 — DÚVIDAS
-   ============================= */
-.chat-layout {
-  display: grid; grid-template-columns: 260px 1fr;
-  min-height: calc(100vh - 100px);
-}
-.chat-list {
-  background: var(--papel); border-right: 1px solid var(--linha);
-  display: flex; flex-direction: column;
-}
-.chat-list-top {
-  padding: 14px 16px; border-bottom: 1px solid var(--linha);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.chat-list-title { font-size: 14px; font-weight: 600; }
-.chat-search { padding: 10px 14px; border-bottom: 1px solid var(--linha); }
-.chat-search input { font-size: 12px; }
-
-.chat-item {
-  display: flex; gap: 10px; padding: 12px 14px;
-  border-bottom: 1px solid var(--bg2); cursor: pointer; transition: all .15s;
-}
-.chat-item:hover { background: var(--bg2); }
-.chat-item.on { background: var(--verde-cl); }
-.chat-avatar {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: var(--bg2); border: 1px solid var(--linha);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
-}
-.chat-nome { font-size: 13px; font-weight: 500; }
-.chat-prev { font-size: 11px; color: var(--tinta3); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
-.chat-tempo { font-family: var(--mono); font-size: 10px; color: var(--tinta3); margin-left: auto; white-space: nowrap; }
-.chat-unread {
-  min-width: 16px; height: 16px; border-radius: 50%;
-  background: var(--verde); color: #fff;
-  font-family: var(--mono); font-size: 10px;
-  display: flex; align-items: center; justify-content: center;
-}
-
-.chat-main { display: flex; flex-direction: column; background: var(--bg); }
-.chat-top {
-  padding: 14px 20px; background: var(--papel);
-  border-bottom: 1px solid var(--linha);
-  display: flex; align-items: center; gap: 12px;
-}
-.chat-msgs { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-
-.msg { max-width: 68%; display: flex; flex-direction: column; gap: 4px; }
-.msg.deles { align-self: flex-start; }
-.msg.meu { align-self: flex-end; }
-.msg-bubble {
-  padding: 10px 14px; border-radius: 8px;
-  font-size: 13px; line-height: 1.6; color: var(--tinta);
-}
-.msg.deles .msg-bubble { background: var(--papel); border: 1px solid var(--linha); border-radius: 2px 8px 8px 8px; }
-.msg.meu .msg-bubble { background: var(--verde); color: #fff; border-radius: 8px 2px 8px 8px; }
-.msg-meta { font-family: var(--mono); font-size: 10px; color: var(--tinta3); }
-.msg.meu .msg-meta { text-align: right; }
-
-.msg-tag {
-  display: inline-block; background: var(--bg2); border: 1px solid var(--linha);
-  border-radius: 3px; padding: 6px 12px; font-family: var(--mono); font-size: 12px;
-  color: var(--tinta2); margin-bottom: 4px; align-self: flex-start;
-}
-
-.chat-input-area {
-  padding: 14px 20px; background: var(--papel);
+/* FOOTER */
+footer {
   border-top: 1px solid var(--linha);
-  display: flex; gap: 10px; align-items: flex-end;
+  padding: 28px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 960px; margin: 0 auto;
+  flex-wrap: wrap; gap: 12px;
 }
-.chat-input-area textarea {
-  resize: none; height: 40px; max-height: 100px; font-size: 13px;
-  transition: height .1s;
+.f-logo { font-family: var(--mono); font-size: 14px; color: var(--tinta2); }
+.f-logo em { color: var(--verde); font-style: normal; }
+.f-links { display: flex; gap: 20px; }
+.f-links a { font-size: 12px; color: var(--tinta3); text-decoration: none; }
+.f-links a:hover { color: var(--verde); }
+.f-copy { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
+
+/* REVEAL */
+.fade { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.fade.in { opacity: 1; transform: none; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  nav ul { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 48px 20px; gap: 36px; }
+  .modulos, .prof-sec, .sim-inner { padding: 48px 20px; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .prof-sec { grid-template-columns: 1fr; }
+  .mat-inner { padding: 24px 20px; }
+  .divider { margin: 0 20px; }
+  footer { padding: 24px 20px; }
+  .stats-row { grid-template-columns: repeat(2,1fr); }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV DE TELAS -->
-<div class="screen-nav">
-<a href="pagemkt.html" class="snav-btn" style="background: var(--verde); color: #fff; border-color: var(--verde); text-decoration: none;">estuda+</a>
-    <button class="snav-btn on" onclick="show('t-login'); this.classList.add('on')">01 · Login</button>
-    <button class="snav-btn" onclick="show('t-dash'); this.classList.add('on')">02 · Dashboard aluno</button>
-    <button class="snav-btn" onclick="show('t-aula'); this.classList.add('on')">03 · Conteúdo / Aula</button>
-    <button class="snav-btn" onclick="show('t-ex'); this.classList.add('on')">04 · Exercício</button>
-    <button class="snav-btn" onclick="show('t-result'); this.classList.add('on')">05 · Resultado simulado</button>
-    <button class="snav-btn" onclick="show('t-prof'); this.classList.add('on')">06 · Painel professor</button>
-    <button class="snav-btn" onclick="show('t-perfil'); this.classList.add('on')">07 · Perfil do aluno</button>
-    <button class="snav-btn" onclick="show('t-duvidas'); this.classList.add('on')">08 · Dúvidas</button>
-</div>
+<nav>
+  <div class="logo">estuda<em>+</em></div>
+  <ul>
+    <li><a href="#modulos">módulos</a></li>
+    <li><a href="#prof">professores</a></li>
+    <li><a href="#sim">simulados</a></li>
+  </ul>
+  <div style="display:flex;gap:8px">
+    <a href="telas.html" class="btn btn-ghost">entrar</a>
+    <a href="#" class="btn btn-verde">cadastrar</a>
+  </div>
+</nav>
 
-<!-- ===================== TELA 1: LOGIN ===================== -->
-<div id="t-login" class="screen on">
-  <div style="height:100%;min-height:calc(100vh - 48px);background:var(--bg);display:flex;align-items:center;justify-content:center;padding:40px 20px">
-    <div style="width:100%;max-width:380px">
-      <div class="login-box">
-        <div class="login-top">
-          <div class="login-logo">estuda<em>+</em></div>
-          <div class="login-tabs">
-            <div class="ltab on" onclick="toggleTab(this,'login-aluno','login-prof')">Sou aluno</div>
-            <div class="ltab" onclick="toggleTab(this,'login-prof','login-aluno')">Sou professor</div>
-          </div>
-        </div>
+<div class="hero">
+  <div class="fade">
+    <div class="hero-label">plataforma de apoio ao estudo — rede pública</div>
+    <h1>Estude melhor.<br>De <mark>graça</mark>.</h1>
+    <p class="hero-desc">Conteúdos didáticos, exercícios, simulados e professores voluntários para alunos do ensino fundamental e médio.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-verde">começar agora</a>
+      <a href="#modulos" class="btn btn-ghost">ver módulos</a>
+    </div>
+    <div class="hero-note">// gratuito · sem anúncios · sem cartão</div>
+  </div>
 
-        <div id="login-aluno" class="login-form">
-          <div class="form-group">
-            <label>E-mail ou matrícula</label>
-            <input type="text" placeholder="seu@email.com ou matrícula">
-          </div>
-          <div class="form-group">
-            <label>Senha</label>
-            <input type="password" placeholder="••••••••">
-          </div>
-          <button class="btn btn-verde" style="width:100%;justify-content:center">Entrar</button>
-          <p style="font-size:12px;color:var(--tinta3);text-align:center">
-            Não tem conta? <a href="#" style="color:var(--verde);text-decoration:none;font-weight:500">Cadastre-se grátis</a>
-          </p>
-        </div>
-
-        <div id="login-prof" class="login-form" style="display:none">
-          <div class="form-group">
-            <label>E-mail</label>
-            <input type="email" placeholder="professor@email.com">
-          </div>
-          <div class="form-group">
-            <label>Senha</label>
-            <input type="password" placeholder="••••••••">
-          </div>
-          <button class="btn btn-verde" style="width:100%;justify-content:center">Entrar como professor</button>
-          <p style="font-size:12px;color:var(--tinta3);text-align:center">
-            Quer ser voluntário? <a href="#" style="color:var(--verde);text-decoration:none;font-weight:500">Cadastre-se aqui</a>
-          </p>
-        </div>
-
-        <div class="login-footer">
-          <p>Educação pública gratuita · sem anúncios</p>
-        </div>
+  <div class="hero-card fade" style="transition-delay:.1s">
+    <div class="hc-header">
+      <div class="hc-dot" style="background:#e74c3c"></div>
+      <div class="hc-dot" style="background:#f1c40f"></div>
+      <div class="hc-dot" style="background:#2ecc71"></div>
+      <span class="hc-title">exercício — matemática</span>
+    </div>
+    <div class="hc-body">
+      <div class="hc-mat">álgebra · 9º ano</div>
+      <div class="hc-q">Qual o valor de <strong>x</strong> na equação 2x + 5 = 17?</div>
+      <div class="hc-ops">
+        <div class="hc-op errada"><span class="hc-letra">A</span> x = 5</div>
+        <div class="hc-op certa"><span class="hc-letra">B</span> x = 6 ✓</div>
+        <div class="hc-op errada"><span class="hc-letra">C</span> x = 7</div>
+        <div class="hc-op errada"><span class="hc-letra">D</span> x = 11</div>
       </div>
-
-      <p style="font-size:11px;color:var(--tinta3);text-align:center;margin-top:16px;font-family:var(--mono)">// acesso gratuito · sem cartão</p>
+    </div>
+    <div class="hc-foot">
+      <div class="prog">
+        <div class="prog-track"><div class="prog-fill" style="width:55%"></div></div>
+        questão 11/20
+      </div>
+      <button class="btn btn-verde" style="font-size:12px;padding:5px 12px">próxima →</button>
     </div>
   </div>
 </div>
 
-<!-- ===================== TELA 2: DASHBOARD ALUNO ===================== -->
-<div id="t-dash" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row">
-      <span style="font-size:13px;color:var(--tinta3)">Olá, <strong style="color:var(--tinta)">Mariana</strong></span>
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--verde-cl);border:1px solid var(--linha);display:flex;align-items:center;justify-content:center;font-size:15px">👩‍🎓</div>
+<div class="divider"></div>
+
+<div class="modulos" id="modulos">
+  <div class="fade">
+    <div class="s-tag">// módulos</div>
+    <h2>O que tem na plataforma</h2>
+  </div>
+  <div class="mod-grid fade" style="transition-delay:.1s">
+    <div class="mod">
+      <div class="mod-n">01</div>
+      <div class="mod-t">Conteúdos didáticos</div>
+      <p class="mod-d">Textos e resumos por matéria e ano escolar, em linguagem direta e acessível.</p>
+      <ul class="mod-l">
+        <li>Todas as matérias do currículo nacional</li>
+        <li>Linguagem simples e objetiva</li>
+        <li>Mapas mentais e esquemas</li>
+        <li>Alinhado com a BNCC</li>
+      </ul>
     </div>
-  </nav>
-  <div class="app-shell">
-    <div class="sidebar">
-      <div class="si on"><span class="si-icon">🏠</span> Início</div>
-      <div class="si"><span class="si-icon">📚</span> Conteúdos</div>
-      <div class="si"><span class="si-icon">✏️</span> Exercícios</div>
-      <div class="si"><span class="si-icon">📝</span> Simulados</div>
-      <div class="si"><span class="si-icon">❓</span> Dúvidas</div>
-      <div class="si-sep"></div>
-      <div class="si"><span class="si-icon">👤</span> Meu perfil</div>
-      <div class="si"><span class="si-icon">⚙️</span> Ajustes</div>
+    <div class="mod">
+      <div class="mod-n">02</div>
+      <div class="mod-t">Exercícios interativos</div>
+      <p class="mod-d">Questões com correção imediata e explicação do gabarito, adaptadas ao nível do aluno.</p>
+      <ul class="mod-l">
+        <li>Feedback na hora</li>
+        <li>Explicação de cada resposta</li>
+        <li>Dificuldade progressiva</li>
+        <li>Histórico de acertos e erros</li>
+      </ul>
     </div>
-    <div class="main">
-      <div class="dash-header">
-        <div class="s-tag">// dashboard</div>
-        <h2>Bom dia, Mariana!</h2>
-        <p>Segunda-feira, 10 de março de 2025</p>
-      </div>
-
-      <div class="grid4" style="margin-bottom:24px">
-        <div class="stat-card"><div class="stat-n">74%</div><div class="stat-l">Progresso geral</div></div>
-        <div class="stat-card"><div class="stat-n" style="color:var(--amarelo)">🔥 12</div><div class="stat-l">Dias seguidos</div></div>
-        <div class="stat-card"><div class="stat-n">280</div><div class="stat-l">Exercícios feitos</div></div>
-        <div class="stat-card"><div class="stat-n">8.4</div><div class="stat-l">Média nos simulados</div></div>
-      </div>
-
-      <div class="grid2" style="margin-bottom:24px">
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Continuar estudando</div>
-          <div class="grid2">
-            <div class="materia-card">
-              <div class="mat-icon">🔢</div>
-              <div class="mat-nome">Matemática</div>
-              <div class="mat-sub">Funções do 2º grau</div>
-              <div class="prog-bar"><div class="prog-fill" style="width:68%"></div></div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--tinta3);margin-top:4px">68%</div>
-            </div>
-            <div class="materia-card">
-              <div class="mat-icon">📖</div>
-              <div class="mat-nome">Português</div>
-              <div class="mat-sub">Concordância verbal</div>
-              <div class="prog-bar"><div class="prog-fill" style="width:45%"></div></div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--tinta3);margin-top:4px">45%</div>
-            </div>
-            <div class="materia-card">
-              <div class="mat-icon">🔬</div>
-              <div class="mat-nome">Ciências</div>
-              <div class="mat-sub">Fotossíntese</div>
-              <div class="prog-bar"><div class="prog-fill" style="width:82%"></div></div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--tinta3);margin-top:4px">82%</div>
-            </div>
-            <div class="materia-card">
-              <div class="mat-icon">🌍</div>
-              <div class="mat-nome">História</div>
-              <div class="mat-sub">Brasil Colônia</div>
-              <div class="prog-bar"><div class="prog-fill" style="width:30%"></div></div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--tinta3);margin-top:4px">30%</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Atividade recente</div>
-          <div class="card" style="padding:0 16px">
-            <div class="atividade-item">
-              <div class="atv-icon" style="background:var(--verde-cl)">✏️</div>
-              <div><div class="atv-title">Exercício — Equações</div><div class="atv-sub">18/20 corretas · Matemática</div></div>
-              <div class="atv-meta">hoje<br><span class="badge b-ok">90%</span></div>
-            </div>
-            <div class="atividade-item">
-              <div class="atv-icon" style="background:var(--azul-cl)">📝</div>
-              <div><div class="atv-title">Simulado ENEM — CN</div><div class="atv-sub">36/45 corretas</div></div>
-              <div class="atv-meta">ontem<br><span class="badge b-ok">80%</span></div>
-            </div>
-            <div class="atividade-item">
-              <div class="atv-icon" style="background:#FEF9E7">📚</div>
-              <div><div class="atv-title">Aula — Fotossíntese</div><div class="atv-sub">Biologia · Concluída</div></div>
-              <div class="atv-meta">ontem<br><span class="badge b-att">lida</span></div>
-            </div>
-            <div class="atividade-item">
-              <div class="atv-icon" style="background:#FDEDEC">❓</div>
-              <div><div class="atv-title">Dúvida respondida</div><div class="atv-sub">Prof. Ana · Matemática</div></div>
-              <div class="atv-meta">2 dias<br><span class="badge b-info">nova</span></div>
-            </div>
-          </div>
-          <div class="streak-box" style="margin-top:12px">
-            <div>
-              <div class="streak-num">🔥12</div>
-            </div>
-            <div>
-              <div class="streak-label">Sequência de estudos</div>
-              <div class="streak-sub">Você estudou 12 dias seguidos. Continue assim!</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div style="font-size:13px;font-weight:600;margin-bottom:12px">Próximo simulado recomendado</div>
-        <div class="card" style="padding:16px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-          <div>
-            <div style="font-size:14px;font-weight:600">Simulado ENEM — Ciências Humanas</div>
-            <div style="font-size:12px;color:var(--tinta3);margin-top:3px">45 questões · 5h30 estimadas · Nível médio</div>
-          </div>
-          <button class="btn btn-verde btn-sm">Iniciar simulado →</button>
-        </div>
-      </div>
+    <div class="mod">
+      <div class="mod-n">03</div>
+      <div class="mod-t">Simulados</div>
+      <p class="mod-d">Provas no modelo ENEM com cronômetro e análise de resultado por área de conhecimento.</p>
+      <ul class="mod-l">
+        <li>Modelo ENEM e vestibulares</li>
+        <li>Cronômetro real</li>
+        <li>Relatório por área</li>
+        <li>Comparativo com tentativas anteriores</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="mod-n">04</div>
+      <div class="mod-t">Painel de professores</div>
+      <p class="mod-d">Professores voluntários gerenciam turmas, respondem dúvidas e acompanham o progresso.</p>
+      <ul class="mod-l">
+        <li>Criação e gestão de turmas</li>
+        <li>Canal de dúvidas</li>
+        <li>Envio de materiais e tarefas</li>
+        <li>Relatórios de desempenho</li>
+      </ul>
     </div>
   </div>
 </div>
 
-<!-- ===================== TELA 3: CONTEÚDO / AULA ===================== -->
-<div id="t-aula" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row"><button class="btn btn-ghost btn-sm">← Voltar</button></div>
-  </nav>
-  <div class="conteudo-layout">
-    <div class="conteudo-sidebar">
-      <div class="cs-title">Matemática — Álgebra</div>
-      <div class="cs-item done">Expressões algébricas <span class="cs-check">✓</span></div>
-      <div class="cs-item done">Equações do 1º grau <span class="cs-check">✓</span></div>
-      <div class="cs-item on">Equações do 2º grau</div>
-      <div class="cs-item">Sistemas de equações</div>
-      <div class="cs-item">Inequações</div>
-      <div class="cs-item">Funções</div>
-      <div class="cs-item">Funções do 2º grau</div>
-      <div style="margin-top:16px;padding:0 16px">
-        <div class="prog-bar" style="height:5px">
-          <div class="prog-fill" style="width:42%"></div>
-        </div>
-        <div style="font-family:var(--mono);font-size:10px;color:var(--tinta3);margin-top:5px">3/7 aulas concluídas</div>
+<div class="mat-band">
+  <div class="mat-inner fade">
+    <span class="mat-lbl">matérias →</span>
+    <div class="tags">
+      <span class="tag">Matemática</span><span class="tag">Português</span>
+      <span class="tag">Ciências</span><span class="tag">História</span>
+      <span class="tag">Geografia</span><span class="tag">Física</span>
+      <span class="tag">Química</span><span class="tag">Biologia</span>
+      <span class="tag">Inglês</span><span class="tag">Artes</span>
+      <span class="tag">Ed. Física</span>
+    </div>
+  </div>
+</div>
+
+<div class="prof-sec" id="prof">
+  <div class="fade">
+    <div class="s-tag">// para professores voluntários</div>
+    <h2>Painel simples,<br>impacto real</h2>
+    <p style="font-size:14px;color:var(--tinta2);line-height:1.7;font-weight:300;margin-top:12px">Ferramentas diretas para acompanhar turmas, responder dúvidas e enviar materiais. Sem burocracia.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div><div class="step-t">Crie sua conta de professor</div><div class="step-d">Cadastro gratuito com verificação simples.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div><div class="step-t">Monte sua turma</div><div class="step-d">Alunos entram com código ou por convite.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div><div class="step-t">Acompanhe o progresso</div><div class="step-d">Veja quem está evoluindo e quem precisa de ajuda.</div></div>
       </div>
     </div>
+    <a href="#" class="btn btn-verde">quero ser professor voluntário</a>
+  </div>
 
-    <div class="conteudo-main">
-      <div class="c-breadcrumb">Matemática / Álgebra / <span>Equações do 2º grau</span></div>
-      <div class="c-titulo">Equações do 2º grau</div>
-      <div class="c-meta">
-        <span>⏱ 15 min de leitura</span>
-        <span>✏️ 8 exercícios</span>
-        <span>📊 Nível médio</span>
-      </div>
-      <div class="c-body">
-        <p>Uma <strong>equação do 2º grau</strong> é uma equação polinomial em que a maior potência da incógnita é 2. Ela tem a forma geral:</p>
-        <div class="c-formula">ax² + bx + c = 0 &nbsp;&nbsp; (a ≠ 0)</div>
-        <p>Os valores <strong>a</strong>, <strong>b</strong> e <strong>c</strong> são chamados de coeficientes. O coeficiente <strong>a</strong> não pode ser zero — se fosse, a equação seria de 1º grau.</p>
-        <div class="c-destaque">
-          <strong>Exemplo:</strong> Na equação 2x² + 3x – 5 = 0, temos a = 2, b = 3 e c = –5.
-        </div>
-        <p>Para resolver uma equação do 2º grau, usamos a <strong>fórmula de Bhaskara</strong>. Mas antes, precisamos calcular o <strong>discriminante</strong>, chamado de <strong>Δ (delta)</strong>:</p>
-        <div class="c-formula">Δ = b² – 4ac</div>
-        <p>O valor do delta nos diz quantas raízes reais a equação tem:</p>
-        <p>• Se <strong>Δ > 0</strong>: dois valores reais e diferentes<br>• Se <strong>Δ = 0</strong>: dois valores iguais (raiz dupla)<br>• Se <strong>Δ &lt; 0</strong>: não existem raízes reais</p>
-        <p>Se o delta for maior ou igual a zero, as raízes são calculadas por:</p>
-        <div class="c-formula">x = (–b ± √Δ) / 2a</div>
-      </div>
-      <div class="c-nav-bottom">
-        <button class="btn btn-ghost btn-sm">← Equações do 1º grau</button>
-        <button class="btn btn-verde btn-sm">Sistemas de equações →</button>
-      </div>
+  <div class="mock fade" style="transition-delay:.15s">
+    <div class="mock-bar">
+      <div class="hc-dot" style="background:#e74c3c"></div>
+      <div class="hc-dot" style="background:#f1c40f"></div>
+      <div class="hc-dot" style="background:#2ecc71"></div>
+      <span class="mock-bar-t">painel do professor</span>
     </div>
+    <div class="mock-tabs">
+      <div class="tab on">turmas</div>
+      <div class="tab">dúvidas</div>
+      <div class="tab">tarefas</div>
+      <div class="tab">relatórios</div>
+    </div>
+    <div class="mock-body">
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">87</div><div class="stat-l">alunos</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l">turmas</div></div>
+        <div class="stat"><div class="stat-n">12</div><div class="stat-l">dúvidas</div></div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>TURMA</th><th>ALUNOS</th><th>PROGRESSO</th><th>STATUS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>9º A — Matemática</td><td>28</td><td>74%</td><td><span class="badge b-ok">ativa</span></td></tr>
+          <tr><td>8º B — Matemática</td><td>31</td><td>52%</td><td><span class="badge b-att">atenção</span></td></tr>
+          <tr><td>ENEM — Intensivo</td><td>28</td><td>81%</td><td><span class="badge b-ok">ativa</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-    <div class="conteudo-aside">
-      <div class="aside-title">Nesta aula</div>
-      <div class="aside-item">Forma geral</div>
-      <div class="aside-item">Os coeficientes</div>
-      <div class="aside-item">O discriminante Δ</div>
-      <div class="aside-item">Fórmula de Bhaskara</div>
-      <div class="aside-item">Exemplos resolvidos</div>
-      <div style="margin-top:20px">
-        <div class="aside-title">Relacionados</div>
-        <div class="aside-item">Exercícios — Eq. 2º grau</div>
-        <div class="aside-item">Simulado — Álgebra</div>
-        <div class="aside-item">Tirar dúvida</div>
+<div class="divider"></div>
+
+<div class="sim-sec" id="sim">
+  <div class="sim-inner">
+    <div class="fade">
+      <div class="s-tag">// simulados</div>
+      <h2>Treine como se fosse o dia da prova</h2>
+    </div>
+    <div class="sim-mock fade" style="transition-delay:.1s">
+      <div class="sim-top">
+        <div class="sim-top-l">Simulado ENEM — Ciências da Natureza · Março 2025</div>
+        <div class="sim-top-r" id="timer">01:42:38</div>
+      </div>
+      <div class="sim-bar"><div class="sim-fill"></div></div>
+      <div class="sim-q">
+        <div class="sim-meta">
+          <span class="sim-num">questão 18 / 45</span>
+          <span class="sim-tag">biologia</span>
+          <span class="sim-tag">nível médio</span>
+        </div>
+        <div class="sim-txt">O processo de fotossíntese é fundamental para a manutenção da vida no planeta. Sobre esse processo, assinale a alternativa que apresenta corretamente os <em>produtos</em> da reação fotoquímica:</div>
+        <div class="sim-alts">
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">A</span><span>CO₂ e H₂O, consumidos durante a fase luminosa da fotossíntese.</span></div>
+          <div class="sim-alt on" onclick="marcar(this)"><span class="sim-l">B</span><span>ATP e NADPH, produzidos durante a fase luminosa e usados na fase escura.</span></div>
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">C</span><span>Glicose e O₂, resultantes diretamente da fase luminosa do processo.</span></div>
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">D</span><span>ADP e Pi, regenerados a partir da hidrólise durante a fase escura.</span></div>
+        </div>
+      </div>
+      <div class="sim-foot">
+        <span class="sim-foot-l">← questão anterior</span>
+        <button class="btn btn-verde" style="font-size:13px">próxima →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===================== TELA 4: EXERCÍCIO ===================== -->
-<div id="t-ex" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row"><button class="btn btn-ghost btn-sm">Encerrar</button></div>
-  </nav>
-  <div class="ex-layout">
-    <div class="ex-main">
-      <div class="ex-header">
-        <div>
-          <div class="s-tag">// exercícios · matemática</div>
-          <div class="ex-progress-text">Questão 6 de 20 · 5 corretas · 0 erradas</div>
-        </div>
-        <div class="ex-timer">⏱ 08:42</div>
-      </div>
-      <div class="prog-bar" style="margin-bottom:20px;height:5px">
-        <div class="prog-fill" style="width:30%"></div>
-      </div>
-
-      <div class="ex-card">
-        <div class="ex-card-top">
-          <div class="row" style="gap:8px">
-            <span class="badge b-info">Equações do 2º grau</span>
-            <span class="badge b-att">Nível médio</span>
-          </div>
-          <span style="font-family:var(--mono);font-size:11px;color:var(--tinta3)">Q.6</span>
-        </div>
-        <div class="ex-q-body">
-          <div class="ex-q-texto">Qual é o valor do discriminante (Δ) da equação <strong>x² – 5x + 6 = 0</strong>?</div>
-          <div class="ex-opts">
-            <div class="ex-opt" onclick="marcarEx(this)"><span class="ex-letra">A</span><span>Δ = 1</span></div>
-            <div class="ex-opt on" onclick="marcarEx(this)"><span class="ex-letra">B</span><span>Δ = 25</span></div>
-            <div class="ex-opt" onclick="marcarEx(this)"><span class="ex-letra">C</span><span>Δ = –1</span></div>
-            <div class="ex-opt" onclick="marcarEx(this)"><span class="ex-letra">D</span><span>Δ = 49</span></div>
-          </div>
-          <div class="ex-explicacao">
-            <div class="ex-exp-title">✓ Resposta correta!</div>
-            <div class="ex-exp-text">Para x² – 5x + 6 = 0, temos a=1, b=–5, c=6. Calculando: Δ = b² – 4ac = (–5)² – 4·1·6 = 25 – 24 = <strong>1</strong>. A alternativa correta seria A.</div>
-          </div>
-        </div>
-        <div class="ex-card-foot">
-          <button class="btn btn-ghost btn-sm">← Anterior</button>
-          <button class="btn btn-verde btn-sm">Próxima →</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="ex-aside">
-      <div class="aside-title" style="margin-bottom:12px">Questões</div>
-      <div class="numeros-grid" style="margin-bottom:20px">
-        <div class="nq ok">1</div><div class="nq ok">2</div><div class="nq ok">3</div>
-        <div class="nq ok">4</div><div class="nq ok">5</div><div class="nq on">6</div>
-        <div class="nq">7</div><div class="nq">8</div><div class="nq">9</div>
-        <div class="nq">10</div><div class="nq">11</div><div class="nq">12</div>
-        <div class="nq">13</div><div class="nq">14</div><div class="nq">15</div>
-        <div class="nq">16</div><div class="nq">17</div><div class="nq">18</div>
-        <div class="nq">19</div><div class="nq">20</div>
-      </div>
-      <div style="font-size:12px;color:var(--tinta3);line-height:1.7">
-        <div>✅ 5 corretas</div>
-        <div>⬜ 14 restantes</div>
-      </div>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--linha)">
-        <div class="aside-title" style="margin-bottom:8px">Atalho</div>
-        <div style="font-size:12px;color:var(--tinta3)">Dúvida nesta questão?</div>
-        <button class="btn btn-ghost btn-sm" style="margin-top:8px;width:100%;justify-content:center">Perguntar ao prof. →</button>
-      </div>
-    </div>
+<footer class="fade">
+  <div class="f-logo">estuda<em>+</em></div>
+  <div class="f-links">
+    <a href="#">sobre</a>
+    <a href="#">privacidade</a>
+    <a href="#">para professores</a>
+    <a href="#">contato</a>
   </div>
-</div>
-
-<!-- ===================== TELA 5: RESULTADO SIMULADO ===================== -->
-<div id="t-result" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row"><button class="btn btn-ghost btn-sm">← Voltar</button></div>
-  </nav>
-  <div class="result-layout">
-    <div class="s-tag">// resultado</div>
-    <h2 style="margin-bottom:20px">Simulado ENEM — Ciências da Natureza</h2>
-
-    <div class="result-header">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
-        <div>
-          <div class="result-title">Seu desempenho</div>
-          <div class="result-meta">Realizado em 10 mar 2025 · Duração: 3h42min</div>
-        </div>
-        <span class="badge b-ok" style="font-size:12px;padding:4px 10px">Acima da média</span>
-      </div>
-      <div class="result-placar">
-        <div>
-          <div class="result-nota">720<span>/1000</span></div>
-          <div style="font-size:12px;color:var(--tinta3);margin-top:4px">Nota ENEM estimada</div>
-        </div>
-        <div class="result-barra-grupo">
-          <div class="rbg-item">
-            <div class="rbg-label"><span>Biologia</span><span class="rbg-pct">80%</span></div>
-            <div class="rbg-bar"><div class="rbg-fill" style="width:80%"></div></div>
-          </div>
-          <div class="rbg-item">
-            <div class="rbg-label"><span>Química</span><span class="rbg-pct">64%</span></div>
-            <div class="rbg-bar"><div class="rbg-fill" style="width:64%;background:#F5C842"></div></div>
-          </div>
-          <div class="rbg-item">
-            <div class="rbg-label"><span>Física</span><span class="rbg-pct">48%</span></div>
-            <div class="rbg-bar"><div class="rbg-fill" style="width:48%;background:var(--vermelho)"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="result-acertos">
-      <div class="stat-card"><div class="stat-n" style="color:var(--verde)">36</div><div class="stat-l">Corretas de 45</div></div>
-      <div class="stat-card"><div class="stat-n" style="color:var(--vermelho)">7</div><div class="stat-l">Erradas</div></div>
-      <div class="stat-card"><div class="stat-n" style="color:var(--tinta3)">2</div><div class="stat-l">Em branco</div></div>
-      <div class="stat-card"><div class="stat-n">80%</div><div class="stat-l">Aproveitamento</div></div>
-    </div>
-
-    <div class="card" style="margin-bottom:20px">
-      <div style="padding:14px 16px;border-bottom:1px solid var(--linha);display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:13px;font-weight:600">Gabarito — questão por questão</span>
-        <span style="font-family:var(--mono);font-size:11px;color:var(--tinta3)">verde=certa · vermelho=errada · cinza=em branco</span>
-      </div>
-      <div class="questoes-grid" id="gabarito-grid"></div>
-    </div>
-
-    <div class="card" style="padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-      <div>
-        <div style="font-size:13px;font-weight:600">Precisa melhorar em Física</div>
-        <div style="font-size:12px;color:var(--tinta3);margin-top:3px">48% de acerto — revise os conteúdos relacionados</div>
-      </div>
-      <button class="btn btn-verde btn-sm">Ir para Física →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== TELA 6: PAINEL PROFESSOR ===================== -->
-<div id="t-prof" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row">
-      <span style="font-size:13px;color:var(--tinta3)">Prof. <strong style="color:var(--tinta)">Ana Silva</strong></span>
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--verde-cl);border:1px solid var(--linha);display:flex;align-items:center;justify-content:center;font-size:15px">👩‍🏫</div>
-    </div>
-  </nav>
-  <div class="app-shell">
-    <div class="sidebar">
-      <div class="si on"><span class="si-icon">🏠</span> Visão geral</div>
-      <div class="si"><span class="si-icon">👥</span> Turmas</div>
-      <div class="si"><span class="si-icon">❓</span> Dúvidas <span class="notif-badge">3</span></div>
-      <div class="si"><span class="si-icon">📝</span> Tarefas</div>
-      <div class="si"><span class="si-icon">📊</span> Relatórios</div>
-      <div class="si"><span class="si-icon">📤</span> Materiais</div>
-      <div class="si-sep"></div>
-      <div class="si"><span class="si-icon">⚙️</span> Ajustes</div>
-    </div>
-    <div class="main">
-      <div class="prof-header">
-        <div>
-          <div class="s-tag">// painel do professor</div>
-          <h2>Bom dia, Ana!</h2>
-          <p class="muted">Você tem 3 dúvidas pendentes e 2 tarefas para corrigir.</p>
-        </div>
-        <button class="btn btn-verde btn-sm">+ Nova turma</button>
-      </div>
-
-      <div class="grid4" style="margin-bottom:24px">
-        <div class="stat-card"><div class="stat-n">87</div><div class="stat-l">Alunos ativos</div></div>
-        <div class="stat-card"><div class="stat-n">3</div><div class="stat-l">Turmas</div></div>
-        <div class="stat-card"><div class="stat-n" style="color:var(--vermelho)">3</div><div class="stat-l">Dúvidas pendentes</div></div>
-        <div class="stat-card"><div class="stat-n" style="color:var(--amarelo)">2</div><div class="stat-l">Tarefas p/ corrigir</div></div>
-      </div>
-
-      <div class="grid2">
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Minhas turmas</div>
-          <div class="card" style="overflow:hidden;margin-bottom:16px">
-            <table>
-              <thead><tr><th>TURMA</th><th>ALUNOS</th><th>PROG.</th><th>STATUS</th></tr></thead>
-              <tbody>
-                <tr><td><strong>9º A — Matemática</strong></td><td>28</td><td>74%</td><td><span class="badge b-ok">ativa</span></td></tr>
-                <tr><td><strong>8º B — Matemática</strong></td><td>31</td><td>52%</td><td><span class="badge b-att">atenção</span></td></tr>
-                <tr><td><strong>ENEM — Intensivo</strong></td><td>28</td><td>81%</td><td><span class="badge b-ok">ativa</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Alunos que precisam de atenção</div>
-          <div class="card" style="padding:0 16px">
-            <div class="aluno-item">
-              <div class="aluno-avatar">👦</div>
-              <div><div class="aluno-nome">Carlos Mendes</div><div class="aluno-sub">8º B · 3 dias sem estudar</div></div>
-              <div class="aluno-prog"><div class="aluno-pct">22%</div><span class="badge b-err">crítico</span></div>
-            </div>
-            <div class="aluno-item">
-              <div class="aluno-avatar">👧</div>
-              <div><div class="aluno-nome">Letícia Souza</div><div class="aluno-sub">9º A · progresso travado</div></div>
-              <div class="aluno-prog"><div class="aluno-pct">38%</div><span class="badge b-att">atenção</span></div>
-            </div>
-            <div class="aluno-item">
-              <div class="aluno-avatar">👦</div>
-              <div><div class="aluno-nome">Pedro Alves</div><div class="aluno-sub">ENEM · simulado não feito</div></div>
-              <div class="aluno-prog"><div class="aluno-pct">55%</div><span class="badge b-att">atenção</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Dúvidas recentes</div>
-          <div class="duvida-card">
-            <div class="duvida-top">
-              <div class="duvida-aluno">👦 Carlos Mendes · 9º A</div>
-              <div style="display:flex;gap:6px;align-items:center"><span class="badge b-err">pendente</span><span class="duvida-tempo">há 2h</span></div>
-            </div>
-            <div class="duvida-texto">"Professora, não entendi como calcular o delta quando o b é negativo..."</div>
-            <div class="duvida-tag">📌 Matemática — Equações 2º grau</div>
-          </div>
-          <div class="duvida-card">
-            <div class="duvida-top">
-              <div class="duvida-aluno">👧 Amanda Lima · ENEM</div>
-              <div style="display:flex;gap:6px;align-items:center"><span class="badge b-err">pendente</span><span class="duvida-tempo">há 4h</span></div>
-            </div>
-            <div class="duvida-texto">"Qual a diferença entre fotossíntese e quimiossíntese?"</div>
-            <div class="duvida-tag">📌 Biologia — Metabolismo celular</div>
-          </div>
-          <div class="duvida-card" style="opacity:.6">
-            <div class="duvida-top">
-              <div class="duvida-aluno">👦 Thiago Costa · 8º B</div>
-              <div style="display:flex;gap:6px;align-items:center"><span class="badge b-ok">respondida</span><span class="duvida-tempo">ontem</span></div>
-            </div>
-            <div class="duvida-texto">"Como resolver equações com frações?"</div>
-            <div class="duvida-tag">📌 Matemática — Álgebra</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== TELA 7: PERFIL DO ALUNO ===================== -->
-<div id="t-perfil" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row"><button class="btn btn-ghost btn-sm">← Voltar</button></div>
-  </nav>
-  <div class="app-shell">
-    <div class="sidebar">
-      <div class="si"><span class="si-icon">🏠</span> Início</div>
-      <div class="si"><span class="si-icon">📚</span> Conteúdos</div>
-      <div class="si"><span class="si-icon">✏️</span> Exercícios</div>
-      <div class="si"><span class="si-icon">📝</span> Simulados</div>
-      <div class="si"><span class="si-icon">❓</span> Dúvidas</div>
-      <div class="si-sep"></div>
-      <div class="si on"><span class="si-icon">👤</span> Meu perfil</div>
-    </div>
-    <div class="main">
-      <div class="perfil-layout">
-        <div class="perfil-header">
-          <div class="perfil-avatar">👩‍🎓</div>
-          <div style="flex:1">
-            <div class="perfil-nome">Mariana Costa</div>
-            <div class="perfil-sub">9º ano · Escola Est. Prof. João Alves · Belém, PA</div>
-            <div class="perfil-badges">
-              <span class="badge b-ok">🔥 12 dias</span>
-              <span class="badge b-att">280 exercícios</span>
-              <span class="badge b-info">3 simulados</span>
-            </div>
-          </div>
-          <button class="btn btn-ghost btn-sm">Editar perfil</button>
-        </div>
-
-        <div class="grid2" style="margin-bottom:24px">
-          <div>
-            <div style="font-size:13px;font-weight:600;margin-bottom:12px">Progresso por matéria</div>
-            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:12px">
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tinta2);margin-bottom:4px"><span>🔢 Matemática</span><span style="font-family:var(--mono)">68%</span></div><div class="prog-bar"><div class="prog-fill" style="width:68%"></div></div></div>
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tinta2);margin-bottom:4px"><span>📖 Português</span><span style="font-family:var(--mono)">45%</span></div><div class="prog-bar"><div class="prog-fill" style="width:45%"></div></div></div>
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tinta2);margin-bottom:4px"><span>🔬 Ciências</span><span style="font-family:var(--mono)">82%</span></div><div class="prog-bar"><div class="prog-fill" style="width:82%"></div></div></div>
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tinta2);margin-bottom:4px"><span>🌍 História</span><span style="font-family:var(--mono)">30%</span></div><div class="prog-bar"><div class="prog-fill" style="width:30%;background:var(--vermelho)"></div></div></div>
-              <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tinta2);margin-bottom:4px"><span>⚡ Física</span><span style="font-family:var(--mono)">55%</span></div><div class="prog-bar"><div class="prog-fill" style="width:55%;background:var(--amarelo)"></div></div></div>
-            </div>
-          </div>
-          <div>
-            <div style="font-size:13px;font-weight:600;margin-bottom:12px">Atividade — últimos 3 meses</div>
-            <div class="card" style="padding:14px">
-              <div class="cal-grid" id="cal-grid"></div>
-              <div style="display:flex;gap:10px;margin-top:10px;font-size:11px;color:var(--tinta3);align-items:center">
-                <div style="width:12px;height:12px;background:var(--bg2);border-radius:2px"></div>sem estudo
-                <div style="width:12px;height:12px;background:#8ecfab;border-radius:2px"></div>pouco
-                <div style="width:12px;height:12px;background:var(--verde);border-radius:2px"></div>muito
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px">Conquistas</div>
-          <div class="card" style="padding:0 16px">
-            <div class="conquista-item">
-              <div class="conquista-icon obtida">🔥</div>
-              <div><div class="conquista-nome">Sequência de 7 dias</div><div class="conquista-desc">Estudou 7 dias seguidos</div></div>
-              <div class="conquista-data">03 mar 2025</div>
-            </div>
-            <div class="conquista-item">
-              <div class="conquista-icon obtida">💯</div>
-              <div><div class="conquista-nome">Perfeito!</div><div class="conquista-desc">10/10 em um exercício</div></div>
-              <div class="conquista-data">28 fev 2025</div>
-            </div>
-            <div class="conquista-item">
-              <div class="conquista-icon obtida">📝</div>
-              <div><div class="conquista-nome">Primeiro simulado</div><div class="conquista-desc">Completou o 1º simulado</div></div>
-              <div class="conquista-data">20 fev 2025</div>
-            </div>
-            <div class="conquista-item" style="opacity:.4">
-              <div class="conquista-icon">🏆</div>
-              <div><div class="conquista-nome">Sequência de 30 dias</div><div class="conquista-desc">Estude 30 dias seguidos</div></div>
-              <div class="conquista-data">bloqueada</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== TELA 8: DÚVIDAS ===================== -->
-<div id="t-duvidas" class="screen">
-  <nav class="app-nav">
-    <div class="logo">estuda<em>+</em></div>
-    <div class="row">
-      <button class="btn btn-verde btn-sm">+ Nova dúvida</button>
-    </div>
-  </nav>
-  <div class="chat-layout">
-    <div class="chat-list">
-      <div class="chat-list-top">
-        <span class="chat-list-title">Minhas dúvidas</span>
-        <span class="badge b-err">3</span>
-      </div>
-      <div class="chat-search">
-        <input type="text" placeholder="Buscar dúvida...">
-      </div>
-      <div class="chat-item on">
-        <div class="chat-avatar">👩‍🏫</div>
-        <div style="flex:1;overflow:hidden">
-          <div class="row" style="justify-content:space-between"><div class="chat-nome">Prof. Ana</div><div class="chat-tempo">10:32</div></div>
-          <div class="chat-prev">Claro! Para calcular o delta...</div>
-        </div>
-        <div class="chat-unread">2</div>
-      </div>
-      <div class="chat-item">
-        <div class="chat-avatar">👨‍🏫</div>
-        <div style="flex:1;overflow:hidden">
-          <div class="row" style="justify-content:space-between"><div class="chat-nome">Prof. Carlos</div><div class="chat-tempo">ontem</div></div>
-          <div class="chat-prev">A fotossíntese ocorre nos...</div>
-        </div>
-      </div>
-      <div class="chat-item">
-        <div class="chat-avatar">👩‍🏫</div>
-        <div style="flex:1;overflow:hidden">
-          <div class="row" style="justify-content:space-between"><div class="chat-nome">Prof. Ana</div><div class="chat-tempo">2 dias</div></div>
-          <div class="chat-prev">Ótima pergunta sobre frações!</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chat-main">
-      <div class="chat-top">
-        <div class="chat-avatar">👩‍🏫</div>
-        <div>
-          <div style="font-size:14px;font-weight:600">Prof. Ana Silva</div>
-          <div style="font-size:11px;color:var(--tinta3)">Matemática · online agora</div>
-        </div>
-        <div style="margin-left:auto"><span class="badge b-ok">online</span></div>
-      </div>
-
-      <div class="chat-msgs">
-        <div class="msg deles">
-          <div class="msg-meta">Prof. Ana · 10:15</div>
-          <div class="msg-bubble">Oi Mariana! Como posso te ajudar hoje?</div>
-        </div>
-        <div class="msg meu">
-          <div class="msg-bubble">Professora, não entendi como calcular o delta quando o b é negativo. Fico confusa com os sinais.</div>
-          <div class="msg-meta">você · 10:18</div>
-        </div>
-        <div class="msg deles">
-          <div class="msg-meta">Prof. Ana · 10:22</div>
-          <div class="msg-bubble">Boa pergunta! Vamos com calma. O delta é sempre b² – 4ac. Quando b é negativo, ao elevar ao quadrado o resultado vira positivo mesmo!</div>
-        </div>
-        <div class="msg deles">
-          <div style="display:flex;flex-direction:column;gap:4px">
-            <div class="msg-bubble">Exemplo: se b = –5, então b² = (–5)² = 25. O sinal negativo some ao quadrar. Faz sentido?</div>
-            <div style="background:var(--bg2);border:1px solid var(--linha);border-radius:6px;padding:12px 14px;font-family:var(--mono);font-size:13px;color:var(--tinta);margin-top:4px">
-              b = –5<br>b² = (–5)² = <strong style="color:var(--verde)">25</strong>
-            </div>
-          </div>
-          <div class="msg-meta">Prof. Ana · 10:22</div>
-        </div>
-        <div class="msg meu">
-          <div class="msg-bubble">Ah, agora ficou claro! Então b² sempre vai ser positivo, né?</div>
-          <div class="msg-meta">você · 10:28</div>
-        </div>
-        <div class="msg deles">
-          <div class="msg-meta">Prof. Ana · 10:32</div>
-          <div class="msg-bubble">Exatamente! Qualquer número ao quadrado é positivo. Quer tentar resolver um exercício agora para fixar?</div>
-        </div>
-      </div>
-
-      <div class="chat-input-area">
-        <textarea placeholder="Escreva sua dúvida..."></textarea>
-        <button class="btn btn-verde btn-sm" style="white-space:nowrap;align-self:flex-end">Enviar →</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="f-copy">// educação pública · gratuito · 2025</div>
+</footer>
 
 <script>
-// Navegação entre telas
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
-  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  const idx = ['t-login','t-dash','t-aula','t-ex','t-result','t-prof','t-perfil','t-duvidas'].indexOf(id);
-  document.querySelectorAll('.snav-btn')[idx].classList.add('on');
-}
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-// Login tabs
-function toggleTab(el, show, hide) {
-  el.parentElement.querySelectorAll('.ltab').forEach(t => t.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById(show).style.display = 'flex';
-  document.getElementById(hide).style.display = 'none';
-}
+  let t = 102*60+38;
+  setInterval(() => {
+    if (t <= 0) return; t--;
+    const h = Math.floor(t/3600), m = Math.floor((t%3600)/60), s = t%60;
+    const el = document.getElementById('timer');
+    if (el) el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, 1000);
 
-// Exercício
-function marcarEx(el) {
-  document.querySelectorAll('.ex-opt').forEach(o => { o.classList.remove('on'); });
-  el.classList.add('on');
-}
-
-// Gabarito grid
-const g = document.getElementById('gabarito-grid');
-if (g) {
-  const res = [1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,2,1];
-  res.forEach((r,i) => {
-    const d = document.createElement('div');
-    d.className = 'qg-item ' + (r===1?'qg-ok':r===0?'qg-err':'qg-skip');
-    d.textContent = i+1;
-    g.appendChild(d);
-  });
-}
-
-// Calendário de atividade
-const cal = document.getElementById('cal-grid');
-if (cal) {
-  const levels = ['','','d1','d2','d3','d4'];
-  for (let i=0; i<84; i++) {
-    const d = document.createElement('div');
-    const r = Math.random();
-    d.className = 'cal-day ' + (r<.35?'':r<.55?'d1':r<.72?'d2':r<.86?'d3':'d4');
-    cal.appendChild(d);
+  function marcar(el) {
+    document.querySelectorAll('.sim-alt').forEach(a => a.classList.remove('on'));
+    el.classList.add('on');
   }
-}
 </script>
 </body>
 </html>
