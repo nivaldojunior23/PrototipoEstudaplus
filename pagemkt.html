@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estuda+</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F5F2EB;
+  --bg2: #EDEAE2;
+  --papel: #FAFAF7;
+  --verde: #1A6B3C;
+  --verde-claro: #E8F5EE;
+  --tinta: #1C1C1A;
+  --tinta2: #4A4A45;
+  --tinta3: #8A8A82;
+  --linha: #D8D4C8;
+  --amarelo: #F5C842;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--tinta);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  height: 56px;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linha);
+  position: sticky; top: 0; z-index: 50;
+}
+
+.logo {
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+.logo em { color: var(--verde); font-style: normal; }
+
+nav ul { display: flex; gap: 28px; list-style: none; }
+nav ul a { font-size: 13px; color: var(--tinta2); text-decoration: none; transition: color .15s; }
+nav ul a:hover { color: var(--verde); }
+
+.btn {
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 4px;
+  cursor: pointer; border: none;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .15s;
+}
+.btn-verde { background: var(--verde); color: #fff; }
+.btn-verde:hover { background: #145730; }
+.btn-ghost { background: transparent; color: var(--tinta2); border: 1px solid var(--linha); }
+.btn-ghost:hover { border-color: var(--tinta3); color: var(--tinta); }
+
+/* HERO */
+.hero {
+  padding: 72px 40px 64px;
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 11px; color: var(--tinta3);
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 38px; font-weight: 600;
+  line-height: 1.15; letter-spacing: -1px;
+  margin-bottom: 18px;
+}
+
+h1 mark {
+  background: var(--amarelo); color: var(--tinta);
+  padding: 0 4px; border-radius: 2px;
+}
+
+.hero-desc {
+  font-size: 15px; color: var(--tinta2);
+  line-height: 1.7; margin-bottom: 32px;
+  font-weight: 300; max-width: 380px;
+}
+
+.hero-ctas { display: flex; gap: 10px; }
+
+.hero-note {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 11px; color: var(--tinta3);
+}
+
+.hero-card {
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: 8px; overflow: hidden;
+}
+
+.hc-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--linha);
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg2);
+}
+
+.hc-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hc-title { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin-left: 6px; }
+
+.hc-body { padding: 20px; }
+.hc-mat { font-family: var(--mono); font-size: 10px; color: var(--tinta3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+.hc-q { font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
+.hc-ops { display: flex; flex-direction: column; gap: 7px; }
+
+.hc-op {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--tinta2);
+  padding: 8px 12px;
+  border: 1px solid var(--linha); border-radius: 4px;
+  cursor: pointer; transition: all .15s;
+  background: var(--bg);
+}
+.hc-op:hover { border-color: var(--verde); color: var(--tinta); }
+.hc-op.certa { border-color: var(--verde); background: var(--verde-claro); color: var(--verde); font-weight: 500; }
+.hc-op.errada { color: var(--tinta3); text-decoration: line-through; }
+.hc-letra { font-family: var(--mono); font-size: 11px; font-weight: 500; min-width: 18px; }
+
+.hc-foot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.prog {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--tinta3);
+}
+.prog-track { width: 80px; height: 3px; background: var(--linha); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--verde); }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--linha); margin: 0 40px; }
+
+/* MODULOS */
+.modulos { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+
+.s-tag { font-family: var(--mono); font-size: 11px; color: var(--tinta3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+
+h2 { font-size: 24px; font-weight: 600; letter-spacing: -.5px; margin-bottom: 32px; }
+
+.mod-grid {
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 1px; border: 1px solid var(--linha);
+  border-radius: 8px; overflow: hidden; background: var(--linha);
+}
+
+.mod {
+  background: var(--papel); padding: 28px;
+  transition: background .15s; cursor: default;
+}
+.mod:hover { background: var(--bg2); }
+
+.mod-n { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin-bottom: 12px; }
+.mod-t { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.mod-d { font-size: 13px; color: var(--tinta2); line-height: 1.65; font-weight: 300; margin-bottom: 18px; }
+.mod-l { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.mod-l li { font-size: 12px; color: var(--tinta3); display: flex; align-items: center; gap: 8px; }
+.mod-l li::before { content: '–'; color: var(--verde); font-family: var(--mono); }
+
+/* MATERIAS */
+.mat-band {
+  background: var(--bg2);
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+.mat-inner {
+  max-width: 960px; margin: 0 auto;
+  padding: 32px 40px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.mat-lbl { font-family: var(--mono); font-size: 11px; color: var(--tinta3); white-space: nowrap; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-size: 12px; color: var(--tinta2);
+  padding: 3px 10px; border: 1px solid var(--linha);
+  border-radius: 3px; background: var(--papel);
+  cursor: pointer; transition: all .15s;
+}
+.tag:hover { border-color: var(--verde); color: var(--verde); background: var(--verde-claro); }
+
+/* PROF */
+.prof-sec {
+  max-width: 960px; margin: 0 auto;
+  padding: 64px 40px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+}
+
+.steps { display: flex; flex-direction: column; gap: 16px; margin: 20px 0 28px; }
+.step { display: flex; align-items: flex-start; gap: 14px; }
+.step-n { font-family: var(--mono); font-size: 11px; color: var(--verde); min-width: 20px; padding-top: 2px; }
+.step-t { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.step-d { font-size: 12px; color: var(--tinta3); font-weight: 300; }
+
+.mock {
+  border: 1px solid var(--linha); border-radius: 8px;
+  overflow: hidden; background: var(--papel);
+}
+.mock-bar {
+  background: var(--bg2); border-bottom: 1px solid var(--linha);
+  padding: 10px 16px; display: flex; align-items: center; gap: 6px;
+}
+.mock-bar-t { font-family: var(--mono); font-size: 11px; color: var(--tinta3); margin: 0 auto; }
+
+.mock-tabs { display: flex; border-bottom: 1px solid var(--linha); }
+.tab {
+  font-size: 12px; padding: 9px 14px;
+  color: var(--tinta3); border-right: 1px solid var(--linha);
+  cursor: pointer; transition: all .15s;
+}
+.tab:hover { background: var(--bg2); }
+.tab.on { color: var(--verde); border-bottom: 2px solid var(--verde); background: var(--verde-claro); }
+
+.mock-body { padding: 16px; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+.stat { padding: 12px; border: 1px solid var(--linha); border-radius: 4px; background: var(--bg); }
+.stat-n { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1; margin-bottom: 3px; }
+.stat-l { font-size: 11px; color: var(--tinta3); }
+
+table { width: 100%; border-collapse: collapse; }
+th { font-family: var(--mono); font-size: 10px; color: var(--tinta3); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--linha); letter-spacing: .5px; font-weight: 500; }
+td { font-size: 12px; padding: 9px 8px; border-bottom: 1px solid var(--bg2); color: var(--tinta2); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg2); }
+
+.badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  padding: 2px 7px; border-radius: 2px;
+}
+.b-ok { background: var(--verde-claro); color: var(--verde); }
+.b-att { background: #FEF9E7; color: #9A7D0A; }
+
+/* SIMULADO */
+.sim-sec {
+  background: var(--bg2);
+  border-top: 1px solid var(--linha);
+  border-bottom: 1px solid var(--linha);
+}
+.sim-inner { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+
+.sim-mock {
+  border: 1px solid var(--linha); border-radius: 8px;
+  overflow: hidden; background: var(--papel); margin-top: 32px;
+}
+.sim-top {
+  padding: 13px 20px; background: var(--bg2);
+  border-bottom: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sim-top-l { font-size: 13px; color: var(--tinta2); font-weight: 500; }
+.sim-top-r { font-family: var(--mono); font-size: 13px; color: var(--tinta); }
+
+.sim-bar { height: 3px; background: var(--linha); }
+.sim-fill { height: 100%; background: var(--verde); width: 36%; }
+
+.sim-q { padding: 28px 28px 20px; }
+.sim-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.sim-num { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
+.sim-tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border: 1px solid var(--linha); border-radius: 2px; color: var(--tinta3); }
+.sim-txt { font-size: 14px; line-height: 1.75; color: var(--tinta); margin-bottom: 20px; }
+
+.sim-alts { display: flex; flex-direction: column; gap: 8px; }
+.sim-alt {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 14px; border: 1px solid var(--linha);
+  border-radius: 4px; font-size: 13px; color: var(--tinta2);
+  cursor: pointer; transition: all .15s; background: var(--bg);
+}
+.sim-alt:hover { border-color: var(--tinta3); color: var(--tinta); background: var(--papel); }
+.sim-alt.on { border-color: var(--verde); background: var(--verde-claro); color: var(--verde); }
+.sim-l { font-family: var(--mono); font-size: 11px; font-weight: 500; min-width: 16px; padding-top: 1px; }
+
+.sim-foot {
+  padding: 13px 20px; border-top: 1px solid var(--linha);
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--bg2);
+}
+.sim-foot-l { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--linha);
+  padding: 28px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 960px; margin: 0 auto;
+  flex-wrap: wrap; gap: 12px;
+}
+.f-logo { font-family: var(--mono); font-size: 14px; color: var(--tinta2); }
+.f-logo em { color: var(--verde); font-style: normal; }
+.f-links { display: flex; gap: 20px; }
+.f-links a { font-size: 12px; color: var(--tinta3); text-decoration: none; }
+.f-links a:hover { color: var(--verde); }
+.f-copy { font-family: var(--mono); font-size: 11px; color: var(--tinta3); }
+
+/* REVEAL */
+.fade { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.fade.in { opacity: 1; transform: none; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  nav ul { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 48px 20px; gap: 36px; }
+  .modulos, .prof-sec, .sim-inner { padding: 48px 20px; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .prof-sec { grid-template-columns: 1fr; }
+  .mat-inner { padding: 24px 20px; }
+  .divider { margin: 0 20px; }
+  footer { padding: 24px 20px; }
+  .stats-row { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">estuda<em>+</em></div>
+  <ul>
+    <li><a href="#modulos">módulos</a></li>
+    <li><a href="#prof">professores</a></li>
+    <li><a href="#sim">simulados</a></li>
+  </ul>
+  <div style="display:flex;gap:8px">
+    <a href="index.html" class="btn btn-ghost">entrar</a>
+    <a href="#" class="btn btn-verde">cadastrar</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="fade">
+    <div class="hero-label">plataforma de apoio ao estudo — rede pública</div>
+    <h1>Estude melhor.<br>De <mark>graça</mark>.</h1>
+    <p class="hero-desc">Conteúdos didáticos, exercícios, simulados e professores voluntários para alunos do ensino fundamental e médio.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-verde">começar agora</a>
+      <a href="#modulos" class="btn btn-ghost">ver módulos</a>
+    </div>
+    <div class="hero-note">// gratuito · sem anúncios · sem cartão</div>
+  </div>
+
+  <div class="hero-card fade" style="transition-delay:.1s">
+    <div class="hc-header">
+      <div class="hc-dot" style="background:#e74c3c"></div>
+      <div class="hc-dot" style="background:#f1c40f"></div>
+      <div class="hc-dot" style="background:#2ecc71"></div>
+      <span class="hc-title">exercício — matemática</span>
+    </div>
+    <div class="hc-body">
+      <div class="hc-mat">álgebra · 9º ano</div>
+      <div class="hc-q">Qual o valor de <strong>x</strong> na equação 2x + 5 = 17?</div>
+      <div class="hc-ops">
+        <div class="hc-op errada"><span class="hc-letra">A</span> x = 5</div>
+        <div class="hc-op certa"><span class="hc-letra">B</span> x = 6 ✓</div>
+        <div class="hc-op errada"><span class="hc-letra">C</span> x = 7</div>
+        <div class="hc-op errada"><span class="hc-letra">D</span> x = 11</div>
+      </div>
+    </div>
+    <div class="hc-foot">
+      <div class="prog">
+        <div class="prog-track"><div class="prog-fill" style="width:55%"></div></div>
+        questão 11/20
+      </div>
+      <button class="btn btn-verde" style="font-size:12px;padding:5px 12px">próxima →</button>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="modulos" id="modulos">
+  <div class="fade">
+    <div class="s-tag">// módulos</div>
+    <h2>O que tem na plataforma</h2>
+  </div>
+  <div class="mod-grid fade" style="transition-delay:.1s">
+    <div class="mod">
+      <div class="mod-n">01</div>
+      <div class="mod-t">Conteúdos didáticos</div>
+      <p class="mod-d">Textos e resumos por matéria e ano escolar, em linguagem direta e acessível.</p>
+      <ul class="mod-l">
+        <li>Todas as matérias do currículo nacional</li>
+        <li>Linguagem simples e objetiva</li>
+        <li>Mapas mentais e esquemas</li>
+        <li>Alinhado com a BNCC</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="mod-n">02</div>
+      <div class="mod-t">Exercícios interativos</div>
+      <p class="mod-d">Questões com correção imediata e explicação do gabarito, adaptadas ao nível do aluno.</p>
+      <ul class="mod-l">
+        <li>Feedback na hora</li>
+        <li>Explicação de cada resposta</li>
+        <li>Dificuldade progressiva</li>
+        <li>Histórico de acertos e erros</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="mod-n">03</div>
+      <div class="mod-t">Simulados</div>
+      <p class="mod-d">Provas no modelo ENEM com cronômetro e análise de resultado por área de conhecimento.</p>
+      <ul class="mod-l">
+        <li>Modelo ENEM e vestibulares</li>
+        <li>Cronômetro real</li>
+        <li>Relatório por área</li>
+        <li>Comparativo com tentativas anteriores</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="mod-n">04</div>
+      <div class="mod-t">Painel de professores</div>
+      <p class="mod-d">Professores voluntários gerenciam turmas, respondem dúvidas e acompanham o progresso.</p>
+      <ul class="mod-l">
+        <li>Criação e gestão de turmas</li>
+        <li>Canal de dúvidas</li>
+        <li>Envio de materiais e tarefas</li>
+        <li>Relatórios de desempenho</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="mat-band">
+  <div class="mat-inner fade">
+    <span class="mat-lbl">matérias →</span>
+    <div class="tags">
+      <span class="tag">Matemática</span><span class="tag">Português</span>
+      <span class="tag">Ciências</span><span class="tag">História</span>
+      <span class="tag">Geografia</span><span class="tag">Física</span>
+      <span class="tag">Química</span><span class="tag">Biologia</span>
+      <span class="tag">Inglês</span><span class="tag">Artes</span>
+      <span class="tag">Ed. Física</span>
+    </div>
+  </div>
+</div>
+
+<div class="prof-sec" id="prof">
+  <div class="fade">
+    <div class="s-tag">// para professores voluntários</div>
+    <h2>Painel simples,<br>impacto real</h2>
+    <p style="font-size:14px;color:var(--tinta2);line-height:1.7;font-weight:300;margin-top:12px">Ferramentas diretas para acompanhar turmas, responder dúvidas e enviar materiais. Sem burocracia.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div><div class="step-t">Crie sua conta de professor</div><div class="step-d">Cadastro gratuito com verificação simples.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div><div class="step-t">Monte sua turma</div><div class="step-d">Alunos entram com código ou por convite.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div><div class="step-t">Acompanhe o progresso</div><div class="step-d">Veja quem está evoluindo e quem precisa de ajuda.</div></div>
+      </div>
+    </div>
+    <a href="#" class="btn btn-verde">quero ser professor voluntário</a>
+  </div>
+
+  <div class="mock fade" style="transition-delay:.15s">
+    <div class="mock-bar">
+      <div class="hc-dot" style="background:#e74c3c"></div>
+      <div class="hc-dot" style="background:#f1c40f"></div>
+      <div class="hc-dot" style="background:#2ecc71"></div>
+      <span class="mock-bar-t">painel do professor</span>
+    </div>
+    <div class="mock-tabs">
+      <div class="tab on">turmas</div>
+      <div class="tab">dúvidas</div>
+      <div class="tab">tarefas</div>
+      <div class="tab">relatórios</div>
+    </div>
+    <div class="mock-body">
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">87</div><div class="stat-l">alunos</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l">turmas</div></div>
+        <div class="stat"><div class="stat-n">12</div><div class="stat-l">dúvidas</div></div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>TURMA</th><th>ALUNOS</th><th>PROGRESSO</th><th>STATUS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>9º A — Matemática</td><td>28</td><td>74%</td><td><span class="badge b-ok">ativa</span></td></tr>
+          <tr><td>8º B — Matemática</td><td>31</td><td>52%</td><td><span class="badge b-att">atenção</span></td></tr>
+          <tr><td>ENEM — Intensivo</td><td>28</td><td>81%</td><td><span class="badge b-ok">ativa</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sim-sec" id="sim">
+  <div class="sim-inner">
+    <div class="fade">
+      <div class="s-tag">// simulados</div>
+      <h2>Treine como se fosse o dia da prova</h2>
+    </div>
+    <div class="sim-mock fade" style="transition-delay:.1s">
+      <div class="sim-top">
+        <div class="sim-top-l">Simulado ENEM — Ciências da Natureza · Março 2025</div>
+        <div class="sim-top-r" id="timer">01:42:38</div>
+      </div>
+      <div class="sim-bar"><div class="sim-fill"></div></div>
+      <div class="sim-q">
+        <div class="sim-meta">
+          <span class="sim-num">questão 18 / 45</span>
+          <span class="sim-tag">biologia</span>
+          <span class="sim-tag">nível médio</span>
+        </div>
+        <div class="sim-txt">O processo de fotossíntese é fundamental para a manutenção da vida no planeta. Sobre esse processo, assinale a alternativa que apresenta corretamente os <em>produtos</em> da reação fotoquímica:</div>
+        <div class="sim-alts">
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">A</span><span>CO₂ e H₂O, consumidos durante a fase luminosa da fotossíntese.</span></div>
+          <div class="sim-alt on" onclick="marcar(this)"><span class="sim-l">B</span><span>ATP e NADPH, produzidos durante a fase luminosa e usados na fase escura.</span></div>
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">C</span><span>Glicose e O₂, resultantes diretamente da fase luminosa do processo.</span></div>
+          <div class="sim-alt" onclick="marcar(this)"><span class="sim-l">D</span><span>ADP e Pi, regenerados a partir da hidrólise durante a fase escura.</span></div>
+        </div>
+      </div>
+      <div class="sim-foot">
+        <span class="sim-foot-l">← questão anterior</span>
+        <button class="btn btn-verde" style="font-size:13px">próxima →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="fade">
+  <div class="f-logo">estuda<em>+</em></div>
+  <div class="f-links">
+    <a href="#">sobre</a>
+    <a href="#">privacidade</a>
+    <a href="#">para professores</a>
+    <a href="#">contato</a>
+  </div>
+  <div class="f-copy">// educação pública · gratuito · 2025</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  let t = 102*60+38;
+  setInterval(() => {
+    if (t <= 0) return; t--;
+    const h = Math.floor(t/3600), m = Math.floor((t%3600)/60), s = t%60;
+    const el = document.getElementById('timer');
+    if (el) el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, 1000);
+
+  function marcar(el) {
+    document.querySelectorAll('.sim-alt').forEach(a => a.classList.remove('on'));
+    el.classList.add('on');
+  }
+</script>
+</body>
+</html>
